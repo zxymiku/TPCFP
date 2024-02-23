@@ -15,5 +15,5 @@ with zipfile.ZipFile(filename, 'r') as zip_ref:
             zip_ref.extractall(pwd=bytes(password_attempt, 'utf-8'))
             print(f"Password found: {password_attempt}")
             break  # 密码找到后退出循环
-        except (RuntimeError, zipfile.BadZipFile, zipfile.ZipDecodeError):
+        except (RuntimeError, zipfile.BadZipFile):
             continue  # 密码错误，继续尝试下一个
