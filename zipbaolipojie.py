@@ -1,19 +1,23 @@
 import zipfile
-import itertools
 
-# 假设你的zip文件名为'your_file.zip'
-filename = input("your file name")
-
-# 生成10位数字的所有组合
-password_combinations = itertools.product(range(10), repeat=10)
-
-with zipfile.ZipFile(filename, 'r') as zip_ref:
-    for combination in password_combinations:
-        password_attempt = ''.join(str(digit) for digit in combination)
-
+def extract_zip(zip_file_path, password_list):
+    for password in password_list:
         try:
-            zip_ref.extractall(pwd=bytes(password_attempt, 'utf-8'))
-            print(f"Password found: {password_attempt}")
-            break  # 密码找到后退出循环
-        except (RuntimeError, zipfile.BadZipFile):
-            continue  # 密码错误，继续尝试下一个
+            with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
+                zip_ref.extractall(pwd=bytes(str(password), 'utf-8'))
+            print(f"Password found: {password}")
+            return True
+        except Exception as e:
+            if "Bad password" in str(e):
+                continue
+            else:
+                print(e)
+                return False
+    print("Password not found")
+    return False
+
+# 密码字典，纯数字
+passwords = [str(i) for i in range(10000)]  # 假设密码是0到9999之间的任意4位数字
+
+zip_file_path = input("请输入压缩文件名")# 压缩文件路径
+extract_zip(zip_file_path, passwords)
