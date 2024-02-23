@@ -21,4 +21,3 @@ passwords = [str(i) for i in range(10000)]  # 假设密码是0到9999之间的�
 
 zip_file_path = input("请输入压缩文件名")# 压缩文件路径
 extract_zip(zip_file_path, passwords)
-# 密码字典，纯数字
