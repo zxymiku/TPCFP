@@ -19,5 +19,5 @@ def extract_zip(zip_file_path, password_list):
 # 密码字典，纯数字
 passwords = [str(i) for i in range(10000)]  # 假设密码是0到9999之间的任意4位数字
 
-zip_file_path = input("请输入压缩文件名")# 压缩文件路径
+zip_file_path = input("请输入压缩文件名")
 extract_zip(zip_file_path, passwords)
